@@ -1,8 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"skGab/Bills-management-service/infrastructure"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	// SERVER INSTANCE
+	server := infrastructure.NewServer()
 
+	// RUN SERVER
+	server.UpServer()
 }

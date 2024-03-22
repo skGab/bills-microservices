@@ -21,4 +21,4 @@ I'll start building a monolitch service and migrate to a microsservice at the en
 
 [] - Domain-driven design
 [] - Test-driven Development
-[] - Continuous Integration
+[] - Continuous Integration sss
