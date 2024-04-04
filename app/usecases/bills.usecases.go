@@ -51,7 +51,6 @@ func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 	if formData == nil {
 		return errors.New("dados não encontrados no corpo da requisição")
 	}
-
 	// BUILD ENTITY
 	billEntity := &entities.BillEntity{
 		ID:    uuid.New(),

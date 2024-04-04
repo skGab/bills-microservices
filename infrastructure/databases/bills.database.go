@@ -3,7 +3,6 @@ package databases
 import (
 	"errors"
 	"fmt"
-
 	"github.com/skGab/Bills-management-service/domain/entities"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -15,7 +14,7 @@ type BillsDatabase struct {
 
 // CREATE THE CONNECTION WITH THE SELECTED DATABASE
 func DatabaseConnection() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 
 	if err != nil {
 		panic(err)
@@ -48,6 +47,7 @@ func (bills *BillsDatabase) Create(billEntity *entities.BillEntity) error {
 
 	if response.Error != nil {
 		fmt.Println(response.Error)
+    
 		return response.Error
 	}
 
@@ -101,5 +101,6 @@ func (bill *BillsDatabase) DeleteAll(billsIDs []int) error {
 		return errors.New("algo inesperado aconteceu ao deletar a tarefa")
 	}
 
+	// RETURN NIL IF ANY ERRORS
 	return nil
 }
