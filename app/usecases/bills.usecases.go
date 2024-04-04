@@ -13,7 +13,7 @@ type BillsUsecases struct {
 	Repository repository.BillsRepository
 }
 
-func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) *error {
+func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 	// BUILD ENTITY
 	billEntity := &entities.BillEntity{
 		ID:    uuid.New(),
