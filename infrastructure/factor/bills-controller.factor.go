@@ -1,16 +1,17 @@
 package factor
 
 import (
-	"skGab/Bills-management-service/app/controllers"
-	"skGab/Bills-management-service/app/usecases"
-	"skGab/Bills-management-service/infrastructure/databases"
-
+	"github.com/skGab/Bills-management-service/app/controllers"
+	"github.com/skGab/Bills-management-service/app/usecases"
+	"github.com/skGab/Bills-management-service/infrastructure/databases"
 	"gorm.io/gorm"
 )
 
 func BillsController(db *gorm.DB) *controllers.BillsController {
 	// DATABASE INSTANCE
-	billsDatabase := &databases.BillsDatabase{}
+	billsDatabase := &databases.BillsDatabase{
+		DB: db,
+	}
 
 	// USECASES INSTANCE
 	billsUsecases := &usecases.BillsUsecases{

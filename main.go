@@ -1,11 +1,10 @@
 package main
 
 import (
-	"skGab/Bills-management-service/infrastructure"
-	"skGab/Bills-management-service/infrastructure/databases"
-	"skGab/Bills-management-service/infrastructure/factor"
-
 	"github.com/gin-gonic/gin"
+	"github.com/skGab/Bills-management-service/infrastructure/databases"
+	"github.com/skGab/Bills-management-service/infrastructure/factor"
+	"github.com/skGab/Bills-management-service/infrastructure/server"
 )
 
 func main() {
@@ -16,7 +15,7 @@ func main() {
 	billsController := factor.BillsController(db)
 
 	// BUILD SERVER
-	server := infrastructure.NewServer(gin.Default(), billsController)
+	server := server.NewServer(gin.Default(), billsController)
 
 	// CONFIGURE AND RUN SERVER
 	server.UpServer()
