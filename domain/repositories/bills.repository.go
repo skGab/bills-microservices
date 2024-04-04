@@ -1,7 +1,11 @@
 package repositories
 
-import "skGab/Bills-management-service/domain/entities"
+import "github.com/skGab/Bills-management-service/domain/entities"
 
 type BillsRepository interface {
-	Create(billEntity *entities.BillEntity) *error
+	GetAll(clientID int) ([]entities.BillEntity, error)
+	Create(billEntity *entities.BillEntity) error
+	Update(billID int, data interface{}) error
+	Delete(billID int) error
+	DeleteAll(billsIDs []int) error
 }
