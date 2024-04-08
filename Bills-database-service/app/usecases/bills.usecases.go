@@ -15,7 +15,7 @@ type BillsUsecases struct {
 }
 
 // GET ALL BILLS
-func (b *BillsUsecases) GetAllBills(clientID int) ([]DTOs.AllBillsDTO, error) {
+func (b *BillsUsecases) GetAllBills(clientID int) ([]DTOs.GetBillsDTO, error) {
 
 	// CHECK FOR PROBLEMNS ON THE CLIENT ID
 	if clientID == 0 {
@@ -30,10 +30,10 @@ func (b *BillsUsecases) GetAllBills(clientID int) ([]DTOs.AllBillsDTO, error) {
 	}
 
 	// MAP TO DTO
-	var billsDTO []DTOs.AllBillsDTO
+	var billsDTO []DTOs.GetBillsDTO
 
 	for _, value := range bills {
-		bill := DTOs.AllBillsDTO{
+		bill := DTOs.GetBillsDTO{
 			Name:  value.Name,
 			Value: value.Value,
 			Date:  value.Date,

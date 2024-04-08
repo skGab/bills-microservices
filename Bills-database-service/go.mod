@@ -1,19 +1,16 @@
-module github.com/skGab/Bills-management-service
+module github.com/skGab/Bills-database-service
 
-replace github.com/skGab/Bills-management-service => ../Bills-management-service
+// replace github.com/skGab/Bills-management-service => ../Bills-management-service
 
 go 1.22.1
 
 require (
 	github.com/google/uuid v1.6.0
+	github.com/skGab/Bills-management-service v0.0.0-20240404234414-5e39d1debb21
 	gorm.io/gorm v1.25.8
 )
 
-require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/mattn/go-sqlite3 v1.14.17 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
-)
+require github.com/mattn/go-sqlite3 v1.14.17 // indirect
 
 require (
 	github.com/bytedance/sonic v1.11.3 // indirect
