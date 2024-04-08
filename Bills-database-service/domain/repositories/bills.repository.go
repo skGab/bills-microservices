@@ -1,6 +1,6 @@
 package repositories
 
-import "github.com/skGab/Bills-database-service/domain/entities"
+import "github.com/skGab/Bills-microservices/Bills-database-service/domain/entities"
 
 type BillsRepository interface {
 	GetAll(clientID int) ([]entities.BillEntity, error)

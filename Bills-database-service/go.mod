@@ -2,7 +2,6 @@ module github.com/skGab/Bills-microservices/Bills-database-service
 
 go 1.22.1
 
-
 require (
 	github.com/google/uuid v1.6.0
 	gorm.io/gorm v1.25.8

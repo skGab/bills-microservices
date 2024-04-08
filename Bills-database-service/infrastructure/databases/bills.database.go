@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/skGab/Bills-database-service/domain/entities"
+	"github.com/skGab/Bills-microservices/Bills-database-service/domain/entities"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )

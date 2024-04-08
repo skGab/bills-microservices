@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	DTOs "github.com/skGab/Bills-database-service/app/dtos"
-	"github.com/skGab/Bills-database-service/domain/entities"
-	"github.com/skGab/Bills-database-service/domain/repositories"
+	DTOs "github.com/skGab/Bills-microservices/Bills-database-service/app/dtos"
+	"github.com/skGab/Bills-microservices/Bills-database-service/domain/entities"
+	"github.com/skGab/Bills-microservices/Bills-database-service/domain/repositories"
 )
 
 type BillsUsecases struct {

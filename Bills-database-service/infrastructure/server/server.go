@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/skGab/Bills-database-service/app/controllers"
+	"github.com/skGab/Bills-microservices/Bills-database-service/app/controllers"
 )
 
 type Server struct {
