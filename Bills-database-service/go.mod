@@ -1,7 +1,5 @@
 module github.com/skGab/Bills-database-service
 
-replace github.com/skGab/Bills-database-service => C:\Users\Kakau\go\src\github.com\skGab\Bills-microservies\Bills-database-service
-
 go 1.22.1
 
 require (
