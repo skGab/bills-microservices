@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/skGab/Bills-management-service/infrastructure/databases"
-	"github.com/skGab/Bills-management-service/infrastructure/factor"
-	"github.com/skGab/Bills-management-service/infrastructure/server"
+	"github.com/skGab/Bills-database-service/infrastructure/databases"
+	"github.com/skGab/Bills-database-service/infrastructure/factor"
+	"github.com/skGab/Bills-database-service/infrastructure/server"
 )
 
 func main() {

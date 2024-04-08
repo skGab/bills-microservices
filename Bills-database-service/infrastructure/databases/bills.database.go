@@ -3,7 +3,8 @@ package databases
 import (
 	"errors"
 	"fmt"
-	"github.com/skGab/Bills-management-service/domain/entities"
+
+	"github.com/skGab/Bills-database-service/domain/entities"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -47,7 +48,7 @@ func (bills *BillsDatabase) Create(billEntity *entities.BillEntity) error {
 
 	if response.Error != nil {
 		fmt.Println(response.Error)
-    
+
 		return response.Error
 	}
 

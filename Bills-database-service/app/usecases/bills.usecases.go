@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	DTOs "github.com/skGab/Bills-management-service/app/dtos"
-	"github.com/skGab/Bills-management-service/domain/entities"
-	"github.com/skGab/Bills-management-service/domain/repositories"
+	DTOs "github.com/skGab/Bills-database-service/app/dtos"
+	"github.com/skGab/Bills-database-service/domain/entities"
+	"github.com/skGab/Bills-database-service/domain/repositories"
 )
 
 type BillsUsecases struct {
@@ -51,9 +51,10 @@ func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 	if formData == nil {
 		return errors.New("dados não encontrados no corpo da requisição")
 	}
+
 	// BUILD ENTITY
 	billEntity := &entities.BillEntity{
-		ID:    uuid.New(),
+		ID:    uuid.New().String(),
 		Name:  formData.Name,
 		Value: formData.Value,
 		Date:  formData.Date,

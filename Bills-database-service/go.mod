@@ -1,12 +1,11 @@
 module github.com/skGab/Bills-database-service
 
-// replace github.com/skGab/Bills-management-service => ../Bills-management-service
+replace github.com/skGab/Bills-database-service => C:\Users\Kakau\go\src\github.com\skGab\Bills-microservies\Bills-database-service
 
 go 1.22.1
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/skGab/Bills-management-service v0.0.0-20240404234414-5e39d1debb21
 	gorm.io/gorm v1.25.8
 )
 

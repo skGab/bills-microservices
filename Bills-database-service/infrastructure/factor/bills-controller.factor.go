@@ -1,9 +1,9 @@
 package factor
 
 import (
-	"github.com/skGab/Bills-management-service/app/controllers"
-	"github.com/skGab/Bills-management-service/app/usecases"
-	"github.com/skGab/Bills-management-service/infrastructure/databases"
+	"github.com/skGab/Bills-database-service/app/controllers"
+	"github.com/skGab/Bills-database-service/app/usecases"
+	"github.com/skGab/Bills-database-service/infrastructure/databases"
 	"gorm.io/gorm"
 )
 

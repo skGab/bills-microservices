@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	DTOs "github.com/skGab/Bills-management-service/app/dtos"
-	"github.com/skGab/Bills-management-service/app/usecases"
+	DTOs "github.com/skGab/Bills-database-service/app/dtos"
+	"github.com/skGab/Bills-database-service/app/usecases"
 )
 
 type BillsController struct {
