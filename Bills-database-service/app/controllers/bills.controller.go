@@ -1,16 +1,17 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	DTOs "github.com/skGab/Bills-microservices/Bills-database-service/app/dtos"
 	"github.com/skGab/Bills-microservices/Bills-database-service/app/usecases"
 )
 
 type BillsController struct {
 	Usecases *usecases.BillsUsecases
+	Validate *validator.Validate
 }
 
 // GET ALL BILLS
@@ -22,7 +23,8 @@ func (b *BillsController) GetBills(gin *gin.Context) {
 	bills, err := b.Usecases.GetAllBills(clientID)
 
 	if err != nil {
-		gin.JSON(http.StatusInternalServerError, err)
+		gin.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	// RETURN BILLS
@@ -35,17 +37,24 @@ func (b *BillsController) CreateBill(gin *gin.Context) {
 	var formData *DTOs.CreateBillDTO
 
 	if err := gin.BindJSON(&formData); err != nil {
-		gin.JSON(http.StatusInternalServerError, err)
+		gin.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 
-	fmt.Println(formData)
+	// VALIDATE THE STRUCT
+	err := b.Validate.Struct(formData)
 
-	// PASS IT TO THE USE CASE
-	err := b.Usecases.CreateBill(formData)
-
-	// RETURN RESPONSE
 	if err != nil {
 		gin.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	// PASS IT TO THE USE CASE
+	validationError := b.Usecases.CreateBill(formData)
+
+	// RETURN RESPONSE
+	if validationError != nil {
+		gin.JSON(http.StatusInternalServerError, validationError.Error())
 	} else {
 		gin.JSON(http.StatusOK, struct {
 			Status  bool

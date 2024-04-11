@@ -36,7 +36,7 @@ func (bills *BillsDatabase) GetAll(clientID string) ([]entities.BillEntity, erro
 	}
 
 	if response.RowsAffected == 0 {
-		return nil, errors.New("algo aconteceu durante a busca de contas")
+		return nil, errors.New("contas não encontradas para esse ID")
 	}
 
 	return billsEntity, nil

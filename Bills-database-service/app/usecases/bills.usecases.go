@@ -19,7 +19,7 @@ type BillsUsecases struct {
 func (b *BillsUsecases) GetAllBills(clientID string) ([]DTOs.GetBillsDTO, error) {
 
 	// CHECK FOR PROBLEMNS ON THE CLIENT ID
-	if clientID == "" {
+	if clientID == "nil" {
 		return nil, errors.New("ID do cliente não encontrado no parametro da rota")
 	}
 
@@ -34,10 +34,12 @@ func (b *BillsUsecases) GetAllBills(clientID string) ([]DTOs.GetBillsDTO, error)
 	var billsDTO []DTOs.GetBillsDTO
 
 	for _, value := range bills {
+
 		bill := DTOs.GetBillsDTO{
+			ID:       value.ID,
 			Name:     value.Name,
 			Value:    value.Value,
-			Due_date: value.Due_date.String(),
+			Due_date: value.Due_date.Format(time.DateOnly),
 		}
 
 		billsDTO = append(billsDTO, bill)
@@ -54,8 +56,7 @@ func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 	}
 
 	// CONVERT STRING DUE DATE TO TIME.TIME
-	due_date, error := time.Parse("2006-01-02", formData.Due_date)
-	// value, err := strconv.ParseFloat(formData.Value, 64)
+	due_date, error := time.Parse(time.DateOnly, formData.Due_date)
 
 	if error != nil {
 		return error

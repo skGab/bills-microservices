@@ -9,4 +9,5 @@ type BillEntity struct {
 	Name     string
 	Value    string
 	Due_date time.Time
+	ClientID string
 }

@@ -11,7 +11,7 @@ type Server struct {
 }
 
 // CONSTRUCTOR
-func NewServer(gin *gin.Engine, billsController *controllers.BillsController) *Server {
+func New(gin *gin.Engine, billsController *controllers.BillsController) *Server {
 	return &Server{
 		Router:           gin,
 		BillsControlller: billsController,
@@ -29,6 +29,9 @@ func (server *Server) UpServer() {
 	server.Router.DELETE("/bills/delete/:id", server.BillsControlller.DeleteBill)
 	server.Router.DELETE("/bills/deleteAll/:id", server.BillsControlller.DeleteAllBills)
 
+	server.Router.ForwardedByClientIP = true
+	server.Router.SetTrustedProxies([]string{"127.0.0.1"})
+
 	// RUN THE SERVER
-	server.Router.Run()
+	server.Router.Run("localhost:8080")
 }
