@@ -23,11 +23,11 @@ func (server *Server) UpServer() {
 	server.Router.Use(CorsMiddleware())
 
 	// CREATE THE API PATHS
-	server.Router.GET("/bills/getAll/clientID", server.BillsControlller.GetBills)
+	server.Router.GET("/bills/getAll/:id", server.BillsControlller.GetBills)
 	server.Router.POST("/bills/create", server.BillsControlller.CreateBill)
-	server.Router.PUT("/bills/update/billID", server.BillsControlller.UpdateBill)
-	server.Router.DELETE("/bills/delete/billID", server.BillsControlller.DeleteBill)
-	server.Router.DELETE("/bills/deleteAll/billsIDs", server.BillsControlller.DeleteAllBills)
+	server.Router.PUT("/bills/update/:id", server.BillsControlller.UpdateBill)
+	server.Router.DELETE("/bills/delete/:id", server.BillsControlller.DeleteBill)
+	server.Router.DELETE("/bills/deleteAll/:id", server.BillsControlller.DeleteAllBills)
 
 	// RUN THE SERVER
 	server.Router.Run()

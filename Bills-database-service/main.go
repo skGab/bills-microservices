@@ -11,8 +11,12 @@ func main() {
 	// START DATABASE CONNECTION
 	db := databases.DatabaseConnection()
 
+	// db.AutoMigrate(&entities.BillEntity{})
+
 	// INSTANCE OF BILLS CONTROLLER
 	billsController := factor.BillsController(db)
+
+	gin.SetMode(gin.DebugMode)
 
 	// BUILD SERVER
 	server := server.NewServer(gin.Default(), billsController)

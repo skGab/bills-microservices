@@ -5,8 +5,8 @@ import (
 )
 
 type BillEntity struct {
-	ID    string
-	Name  string
-	Value float64
-	Date  time.Time
+	ID       string
+	Name     string
+	Value    string
+	Due_date time.Time
 }

@@ -1,9 +1,7 @@
 package DTOs
 
-import "time"
-
 type CreateBillDTO struct {
-	Name  string    `json:"name"`
-	Value float64   `json:"value"`
-	Date  time.Time `json:"date"`
+	Name     string `json:"name" binding:"required"`
+	Value    string `json:"value" binding:"required"`
+	Due_date string `json:"due_date" binding:"required"`
 }

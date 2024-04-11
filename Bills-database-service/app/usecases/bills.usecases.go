@@ -3,6 +3,7 @@ package usecases
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	DTOs "github.com/skGab/Bills-microservices/Bills-database-service/app/dtos"
@@ -15,10 +16,10 @@ type BillsUsecases struct {
 }
 
 // GET ALL BILLS
-func (b *BillsUsecases) GetAllBills(clientID int) ([]DTOs.GetBillsDTO, error) {
+func (b *BillsUsecases) GetAllBills(clientID string) ([]DTOs.GetBillsDTO, error) {
 
 	// CHECK FOR PROBLEMNS ON THE CLIENT ID
-	if clientID == 0 {
+	if clientID == "" {
 		return nil, errors.New("ID do cliente não encontrado no parametro da rota")
 	}
 
@@ -34,9 +35,9 @@ func (b *BillsUsecases) GetAllBills(clientID int) ([]DTOs.GetBillsDTO, error) {
 
 	for _, value := range bills {
 		bill := DTOs.GetBillsDTO{
-			Name:  value.Name,
-			Value: value.Value,
-			Date:  value.Date,
+			Name:     value.Name,
+			Value:    value.Value,
+			Due_date: value.Due_date.String(),
 		}
 
 		billsDTO = append(billsDTO, bill)
@@ -52,12 +53,20 @@ func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 		return errors.New("dados não encontrados no corpo da requisição")
 	}
 
+	// CONVERT STRING DUE DATE TO TIME.TIME
+	due_date, error := time.Parse("2006-01-02", formData.Due_date)
+	// value, err := strconv.ParseFloat(formData.Value, 64)
+
+	if error != nil {
+		return error
+	}
+
 	// BUILD ENTITY
 	billEntity := &entities.BillEntity{
-		ID:    uuid.New().String(),
-		Name:  formData.Name,
-		Value: formData.Value,
-		Date:  formData.Date,
+		ID:       uuid.New().String(),
+		Name:     formData.Name,
+		Value:    formData.Value,
+		Due_date: due_date,
 	}
 
 	// PASS ENTITY DATA TO REPOSITORY
@@ -73,9 +82,9 @@ func (b *BillsUsecases) CreateBill(formData *DTOs.CreateBillDTO) error {
 }
 
 // UPDATE BILL
-func (b *BillsUsecases) UpdateBill(billID int, data interface{}) (bool, error) {
+func (b *BillsUsecases) UpdateBill(billID string, data interface{}) (bool, error) {
 
-	if data == nil || billID == 0 {
+	if data == nil || billID == "" {
 		return false, errors.New("ID ou dados não encontrados para atualização")
 	}
 
@@ -89,9 +98,9 @@ func (b *BillsUsecases) UpdateBill(billID int, data interface{}) (bool, error) {
 }
 
 // DELETE BILL
-func (b *BillsUsecases) DeleteBill(billID int) (bool, error) {
+func (b *BillsUsecases) DeleteBill(billID string) (bool, error) {
 
-	if billID == 0 {
+	if billID == "" {
 		return false, errors.New("ID da conta não encontrado no parametro")
 	}
 
@@ -105,7 +114,7 @@ func (b *BillsUsecases) DeleteBill(billID int) (bool, error) {
 }
 
 // DELETE ALL BILLS
-func (b *BillsUsecases) DeleteAllBills(billsIDs []int) (bool, error) {
+func (b *BillsUsecases) DeleteAllBills(billsIDs []string) (bool, error) {
 
 	if len(billsIDs) == 0 {
 		return false, errors.New("IDs não foram encontrados no corpo da requisição")

@@ -15,7 +15,7 @@ type BillsDatabase struct {
 
 // CREATE THE CONNECTION WITH THE SELECTED DATABASE
 func DatabaseConnection() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 
 	if err != nil {
 		panic(err)
@@ -25,7 +25,7 @@ func DatabaseConnection() *gorm.DB {
 }
 
 // GET ALL BILLS
-func (bills *BillsDatabase) GetAll(clientID int) ([]entities.BillEntity, error) {
+func (bills *BillsDatabase) GetAll(clientID string) ([]entities.BillEntity, error) {
 	var billsEntity []entities.BillEntity
 
 	response := bills.DB.Where("id = ?", clientID).Find(&billsEntity)
@@ -60,7 +60,7 @@ func (bills *BillsDatabase) Create(billEntity *entities.BillEntity) error {
 }
 
 // UPDATE BILL
-func (bill *BillsDatabase) Update(billID int, data interface{}) error {
+func (bill *BillsDatabase) Update(billID string, data interface{}) error {
 	response := bill.DB.Model(&entities.BillEntity{}).Where("id = ?", billID).Updates(data)
 
 	if response.Error != nil {
@@ -75,7 +75,7 @@ func (bill *BillsDatabase) Update(billID int, data interface{}) error {
 }
 
 // DELETE BILL
-func (bill *BillsDatabase) Delete(billID int) error {
+func (bill *BillsDatabase) Delete(billID string) error {
 
 	response := bill.DB.Delete(&entities.BillEntity{}, billID)
 
@@ -91,7 +91,7 @@ func (bill *BillsDatabase) Delete(billID int) error {
 }
 
 // DELETE ALL BILLS
-func (bill *BillsDatabase) DeleteAll(billsIDs []int) error {
+func (bill *BillsDatabase) DeleteAll(billsIDs []string) error {
 	response := bill.DB.Delete(&entities.BillEntity{}, billsIDs)
 
 	if response.Error != nil {

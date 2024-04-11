@@ -1,9 +1,7 @@
 package DTOs
 
-import "time"
-
 type GetBillsDTO struct {
-	Name  string
-	Value float64
-	Date  time.Time
+	Name     string
+	Value    string
+	Due_date string
 }
