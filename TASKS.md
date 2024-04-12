@@ -4,12 +4,18 @@
 // EXTRACT SOME FUNCTIONAL REQUIRIMENTS FROM THE ORIGNAL EXCEL
 // AFTER THE IMPLEMENTATION OF THEM, THINK IN MORE FUNCTIONALITYS
 
+// GATWAY-SERVICE
+[] - Create the gateway route
+[] - Route incoming requests from client to appropriate service
+
+//DATABASE SERVICE (gRPC)
 [x] - Get Bills
-[x] - Create Bill
+[x] - Create Bill (TESTED)
 [x] - Update Bill (after the first info about the bills)
 [x] - Delete Bill
 [x] - Delete Bills
 
+//DOMAIN BUSINESS SERVICE
 [] - Show the total amount spent on bills
 [] - Show the total amout to pay of each user
 [] - Show the individual amout of each bill for all users
@@ -18,6 +24,7 @@
 
 [] - Automatic send the value of each account to the inter account (after the user confirm that's everything fine)
 
+// USER SERVICE (gRPC)
 [] - User registration
 [] - User login
 
@@ -25,9 +32,10 @@
 
 [] - Docker
 [] - RabbitMQ
+[] - gRPC
 
 - Required Methodologies
 
-[] - Domain-driven design
+[x] - Domain-driven design
 [] - Test-driven Development
-[] - Continuous Integration sss
+[] - Continuous Integration
