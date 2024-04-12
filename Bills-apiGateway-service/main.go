@@ -1,11 +1,18 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"html"
+	"log"
+	"net/http"
+)
+
+func gateWayPipe(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+}
 
 func main() {
-	router := gin.Default()
+	http.HandleFunc("/", gateWayPipe)
 
-	router
-
-	router.Run(":8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
