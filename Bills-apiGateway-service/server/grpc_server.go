@@ -1,34 +1,33 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net"
 
-	protoBuff "github.com/skGab/Bills-microservices/Bills-apigateway-service/grpc/database"
-	"github.com/skGab/Bills-microservices/Bills-apigateway-service/grpc/database/services"
+	protoBuff "github.com/skGab/Bills-microservices/Bills-apigateway-service/grpc/database/proto"
 	"google.golang.org/grpc"
 )
 
-func newServer() *services.BillsDatabaseService {
-	return &services.BillsDatabaseService{
-		savedFeatures: ""
-	}
+type server struct {
+	protoBuff.UnimplementedBillsDatabaseServiceServer
 }
 
 func Run() {
-	port := ":3030"
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+	// CREATE A LISTENER TO WATCH ON THE PORT 3030 AND WITH TPC NETWORK
+	lis, err := net.Listen("tcp", "localhost:3030")
 
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+	// CREATE EMPTY ARRAY OF OPTIONS
 	var opts []grpc.ServerOption
 
+	// CREATE THE GRPC SERVER AND PASS THE CREATED ARRAY OPTIONS
 	grpcServer := grpc.NewServer(opts...)
 
-	protoBuff.RegisterBillsDatabaseServer(grpcServer, newServer())
+	// REGISTER THE SERVICE INSTANCE WITH THE GRPC SERVER
+	protoBuff.RegisterBillsDatabaseServiceServer(grpcServer, &server{})
 
 	// START THE SERVER WITH THE DEFINED LISTENER
 	// THE LISTENER HAS INFORMATION ABOUT THE PORT AND THE CONECTION'S TYPE

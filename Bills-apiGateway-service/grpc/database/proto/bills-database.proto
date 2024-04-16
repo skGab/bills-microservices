@@ -1,8 +1,8 @@
 syntax="proto3";
 
-option go_package = "github.com/skGab/Bills-microservices/Bills-apigateway-service";
+package database_proto;
 
-package bills_database;
+option go_package = "github.com/skGab/Bills-microservices/Bills-apigateway-service/database/proto";
 
 message Client {
     string ID  = 1;
@@ -15,6 +15,6 @@ message Bills{
     string Due_date  = 4;
 }
 
-service BillsDatabase {
+service BillsDatabaseService {
     rpc getAll(Client) returns(Bills) {}
 }
