@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-type server struct {
+type GRpcServer struct {
 	protoBuff.UnimplementedBillsDatabaseServiceServer
 }
 
@@ -27,7 +27,7 @@ func Run() {
 	grpcServer := grpc.NewServer(opts...)
 
 	// REGISTER THE SERVICE INSTANCE WITH THE GRPC SERVER
-	protoBuff.RegisterBillsDatabaseServiceServer(grpcServer, &server{})
+	protoBuff.RegisterBillsDatabaseServiceServer(grpcServer, &GRpcServer{})
 
 	// START THE SERVER WITH THE DEFINED LISTENER
 	// THE LISTENER HAS INFORMATION ABOUT THE PORT AND THE CONECTION'S TYPE
