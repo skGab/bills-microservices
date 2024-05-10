@@ -29,6 +29,7 @@ func (gp *GateWayPipe) Run(gin *gin.Context) {
 
 		gin.JSON(http.StatusOK, result)
 	default:
+		gin.JSON(http.StatusBadRequest, gin.H{"Algo deu errado durante o request"})
 	}
 
 }

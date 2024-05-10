@@ -5,7 +5,7 @@
 // AFTER THE IMPLEMENTATION OF THEM, THINK IN MORE FUNCTIONALITYS
 
 // GATWAY-SERVICE
-[] - Create the gateway route
+[x] - Create the gateway route
 [] - Route incoming requests from client to appropriate service
 
 //DATABASE SERVICE (gRPC)
