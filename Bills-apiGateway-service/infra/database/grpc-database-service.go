@@ -3,6 +3,8 @@ package bills_database
 import (
 	"context"
 	"errors"
+
+	protoBuff "github.com/skGab/Bills-microservices/Bills-apigateway-service/domain/proto"
 )
 
 type BillsDatabaseService struct {

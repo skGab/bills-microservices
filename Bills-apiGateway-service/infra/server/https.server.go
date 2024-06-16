@@ -7,8 +7,8 @@ import (
 	"github.com/skGab/Bills-microservices/Bills-apigateway-service/app/controllers"
 )
 
-func RunHttps(adress string) {
-	http.Handle("/", controllers.GateWayPipe)
+func RunHttps(adress string, gateway *controllers.GateWayPipe) {
+	http.Handle("/gateway/:routingKey", gateway)
 
 	log.Fatal(http.ListenAndServe(adress, nil))
 }

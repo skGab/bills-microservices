@@ -8,17 +8,17 @@ type Handlers struct{}
 // 	Delete(billID string) error
 // 	DeleteAll(billsIDs []string) error
 
-type Param struct {
-	id     *string
-	action *string
+type Params struct {
+	id         *string `param:"id"`
+	routingKey string  `param:"action"`
 }
 type Body struct {
-	id   *int
-	ids  *[]int
-	data *interface{}
+	id   *int         `body:"id"`
+	ids  *[]int       `body:"ids"`
+	data *interface{} `body:"data"`
 }
 
-func (hs *Handlers) DatabaseHandle(Body, Param) (string, error) {
+func (hs *Handlers) DatabaseHandle(body Body, params Params) (string, error) {
 
 	// SE ID NA ROTA + ACTION = GET
 	// SE DADOS NO REQUEST + ACTION = POST

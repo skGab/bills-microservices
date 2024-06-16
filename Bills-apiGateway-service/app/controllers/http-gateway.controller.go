@@ -9,35 +9,24 @@ import (
 )
 
 type GateWayPipe struct {
-	services *services.Handlers
+	Services *services.Handlers
 }
 
-type url struct {
-	name  string  `url:"name" binding:"required"`
-	total float32 `url:"total" binding:"required"`
-	age   int     `url:"age" binding:"required"`
+// ServeHTTP implements http.Handler.
+func (gp *GateWayPipe) ServeHTTP(http.ResponseWriter, *http.Request) {
+	panic("unimplemented")
 }
 
+// THE WAY THE USER COULD PASS DATA WITHIN THE REQUEST, SHOULD
+// WILL GET THE REQUEST FROM THE USER AND EXTRACT THE ROUTING KEY
+// THEN WOULD CALL THE CORREPONDING SERVICE BASED ON THE ROUTING KEY
 func (gp *GateWayPipe) Run(gin *gin.Context) {
+	payload := gp.Services.HandleRequest(gin)
 
-	// VERIFY IF HAS DATA ON THE PARAM
-	// GET THE ACTION
-	var urlData *url
-
-	if err := gin.ShouldBindUri(urlData); err != nil {
-		gin.JSON(http.StatusBadRequest, err)
-	}
-
-	var body *interface{}
-
-	if err := gin.ShouldBindJSON(body); err != nil {
-		gin.JSON(http.StatusBadRequest, err)
-	}
-
-	switch action {
+	switch payload.routingKey {
 	case "database":
 
-		result, err := gp.services.DatabaseHandle()
+		result, err := gp.Services.DatabaseHandle(*body, *params)
 
 		if err != nil {
 			gin.JSON(http.StatusInternalServerError, err)
