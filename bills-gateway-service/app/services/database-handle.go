@@ -18,7 +18,7 @@ type Body struct {
 	data *interface{} `body:"data"`
 }
 
-func (hs *Handlers) DatabaseHandle(body Body, params Params) (string, error) {
+func (hs *Handlers) DatabaseHandle(body interface{}, params interface{}) (string, error) {
 
 	// SE ID NA ROTA + ACTION = GET
 	// SE DADOS NO REQUEST + ACTION = POST

@@ -12,21 +12,16 @@ type GateWayPipe struct {
 	Services *services.Handlers
 }
 
-// ServeHTTP implements http.Handler.
-func (gp *GateWayPipe) ServeHTTP(http.ResponseWriter, *http.Request) {
-	panic("unimplemented")
-}
-
 // THE WAY THE USER COULD PASS DATA WITHIN THE REQUEST, SHOULD
 // WILL GET THE REQUEST FROM THE USER AND EXTRACT THE ROUTING KEY
 // THEN WOULD CALL THE CORREPONDING SERVICE BASED ON THE ROUTING KEY
 func (gp *GateWayPipe) Run(gin *gin.Context) {
 	payload := gp.Services.HandleRequest(gin)
 
-	switch payload.routingKey {
+	switch payload.RoutingKey {
 	case "database":
 
-		result, err := gp.Services.DatabaseHandle(*body, *params)
+		result, err := gp.Services.DatabaseHandle()
 
 		if err != nil {
 			gin.JSON(http.StatusInternalServerError, err)
